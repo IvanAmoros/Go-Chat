@@ -172,7 +172,7 @@ func main() {
 
     fmt.Printf("Server started on port %s\n", port)
 
-    http.HandleFunc("/ws", handleWebSocket)
+    http.HandleFunc("/ws/", handleWebSocket)
 
     go handleMessages()
 
