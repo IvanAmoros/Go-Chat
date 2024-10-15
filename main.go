@@ -26,9 +26,10 @@ var broadcast = make(chan *Message)
 var mutex = sync.Mutex{}
 
 type Message struct {
-    Text      string `json:"text"`
-    Sender    string `json:"sender"`
-    Timestamp string `json:"timestamp"`
+    Type        string `json:"type"`
+    Text        string `json:"text"`
+    Sender      string `json:"sender"`
+    Timestamp   string `json:"timestamp"`
 }
 
 // Function to handle WebSocket connections
@@ -68,7 +69,7 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
         }
 
         // Ignore ping messages
-        if message.Text == "ping" {
+        if message.Type == "ping" {
             continue
         }
 
