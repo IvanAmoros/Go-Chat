@@ -40,6 +40,12 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
         return
     }
 
+    // Set a pong handler to handle ping-pong keepalive
+    conn.SetPongHandler(func(appData string) error {
+        log.Println("Pong received from client")
+        return nil
+    })
+
     client := &Client{conn: conn}
     mutex.Lock()
     clients[client] = true
@@ -70,6 +76,10 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
 
         // Ignore ping messages
         if message.Type == "ping" {
+            // Optionally send a Pong message back to the client if needed
+            if err := conn.WriteMessage(websocket.PongMessage, nil); err != nil {
+                log.Println("Error sending pong message:", err)
+            }
             continue
         }
 
