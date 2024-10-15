@@ -103,6 +103,13 @@ func main() {
     // Run the message broadcasting handler
     go handleMessages()
 
+    // Get the port from the environment (required by Heroku)
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080" // Default to 8080 if not running on Heroku
+        fmt.Println("PORT environment variable not set, using default port 8080")
+    }
+
     fmt.Println("Server started at :8080")
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
