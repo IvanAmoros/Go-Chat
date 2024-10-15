@@ -124,7 +124,7 @@ func main() {
 
     fmt.Printf("Server started on port %s\n", port) // Corrected log message
 
-    http.HandleFunc("/ws", handleWebSocket)
+    http.HandleFunc("/ws/", handleWebSocket)
 
     // Run the message broadcasting handler
     go handleMessages()
