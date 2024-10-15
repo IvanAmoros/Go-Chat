@@ -67,6 +67,11 @@ func handleWebSocket(w http.ResponseWriter, r *http.Request) {
             continue
         }
 
+        // Ignore ping messages
+        if message.Text == "ping" {
+            continue
+        }
+
         // Add timestamp to the message
         message.Timestamp = time.Now().Format("2006-01-02 15:04:05")
 
