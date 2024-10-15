@@ -118,8 +118,8 @@ func main() {
     // Get the port from the environment (required by Heroku)
     port := os.Getenv("PORT")
     if port == "" {
-        port = "8080" // Default to 8080 for local testing
-        fmt.Println("PORT environment variable not set, using default port 8080")
+        port = "8090" // Default to 8080 for local testing
+        fmt.Println("PORT environment variable not set, using default port 8090")
     }
 
     fmt.Printf("Server started on port %s\n", port) // Corrected log message
